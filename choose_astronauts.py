@@ -1,9 +1,9 @@
 from flask import Flask, url_for, request
+import os
 
 app = Flask(__name__)
 
 
-@app.route('/')
 @app.route('/astronaut_selection', methods=['POST', 'GET'])
 def form_sample():
     if request.method == 'GET':
@@ -113,6 +113,108 @@ def form_sample():
         print(request.form['accept'])
         print(request.form['sex'])
         return "Форма отправлена"
+
+@app.route('/load_photo', methods=['POST', 'GET'])
+def load_photo():
+    print(os.path.exists('static/img'))
+    if request.method == 'GET' and not any(os.scandir('static/img')):
+        return f'''<!doctype html>
+                        <html lang="en">
+                          <head>
+                            <meta charset="utf-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                             <link rel="stylesheet"
+                             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+                             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+                             crossorigin="anonymous">
+                            <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
+                            <title>Пример загрузки файла</title>
+                          </head>
+                          <body>
+                            <h1>Загрузим файл</h1>
+                            <form method="post" enctype="multipart/form-data">
+                               <div class="form-group">
+                                    <label for="photo">Выберите файл</label>
+                                    <input type="file" class="form-control-file" id="photo" name="file">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </form>
+                          </body>
+                        </html>'''
+    elif request.method == 'POST':
+        f = request.files['file']
+        f.save(os.path.join('static/img', f.filename))
+        return 'Обновите страничку'
+    else:
+        print(os.listdir('static/img')[0])
+        return f'''<!doctype html>
+                                <html lang="en">
+                                  <head>
+                                    <meta charset="utf-8">
+                                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                                    <link rel="stylesheet"
+                                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+                                    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+                                    crossorigin="anonymous">
+                                    <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
+                                    <title>Отбор астронавтов</title>
+                                  </head>
+                                  <body>
+                                  <div>
+                                        <form class="login_form" method="post">
+                                        <div align="center">
+                                    <h2>Анкета претендента</h2>
+                                    <h5>на участие в миссии</h5>
+                                  </div align="center">  
+                                    <div class="form-group">
+                                        <label for="photo">Приложите фотографию</label>
+                                         <input type="file" class="form-control-file" id="photo" name="file">
+                                    </div>
+                                        <br>
+                                        <img src="/static/img/{os.listdir('static/img')[0]}" style="max-width: 400px;>
+                                        <br>
+                                        <button type="submit" class="btn btn-primary">Отправить</button>
+                                    </form>
+                                  </div>
+                                  </body>
+                                </html>'''
+
+
+
+
+
+
+@app.route('/sample_file_upload', methods=['POST', 'GET'])
+def sample_file_upload():
+    if request.method == 'GET':
+        return f'''<!doctype html>
+                        <html lang="en">
+                          <head>
+                            <meta charset="utf-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                             <link rel="stylesheet"
+                             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+                             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+                             crossorigin="anonymous">
+                            <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
+                            <title>Пример загрузки файла</title>
+                          </head>
+                          <body>
+                            <h1>Загрузим файл</h1>
+                            <form method="post" enctype="multipart/form-data">
+                               <div class="form-group">
+                                    <label for="photo">Выберите файл</label>
+                                    <input type="file" class="form-control-file" id="photo" name="file">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </form>
+                          </body>
+                        </html>'''
+    elif request.method == 'POST':
+        f = request.files['file']
+        print(f.read())
+        return "Форма отправлена"
+
 
 
 if __name__ == '__main__':
