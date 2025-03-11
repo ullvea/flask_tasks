@@ -25,6 +25,14 @@ def list_prof(list):
     param['jobs_list'] = jobs_list
     return render_template('list_prof.html', **param)
 
+
+@app.route('/training/<prof>')
+def training(prof):
+    param = {}
+    param['prof'] = prof
+    return render_template('training.html', **param)
+
+
 @app.route('/distribution')
 def distribution():
     param = {}

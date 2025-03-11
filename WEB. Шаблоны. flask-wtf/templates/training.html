@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Миссия Колонизация Марса</h1>
+<h4>И на Марсе будут яблони цвести!</h4>
+{% if "инженер" in prof or "строитель" in prof %}
+<div align="center">
+    {% block header1 %}
+    <h2>Инженерные тренажеры</h2>
+    {% endblock %}
+    {% block im1 %}
+    <img src="/static/training/im1.jpg" class="d-block w-100">{% endblock %}
+</div>
+{% else %}
+<div align="center">
+    {% block header2 %}
+    <h2>Научные симуляторы</h2>
+    {% endblock %}
+    {% block im2 %}
+    <img src="/static/training/im2.jpg" class="d-block w-100">{% endblock %}
+</div>
+{% endif %}
+</body>
+</html>
