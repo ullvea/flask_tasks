@@ -25,6 +25,12 @@ def list_prof(list):
     param['jobs_list'] = jobs_list
     return render_template('list_prof.html', **param)
 
+@app.route('/distribution')
+def distribution():
+    param = {}
+    param['list'] = ['Катя', 'Саша', 'Ваня']
+    return render_template('distribution.html', **param)
+
 
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
