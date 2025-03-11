@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    </head>
+    <body>
+      <h1>Миссия Колонизация Марса</h1>
+        <h4>И на Марсе будут яблони цвести!</h4>
+      {% if list == "ul" %}
+      <ul>
+         {% for item in jobs_list['jobs'] %}
+            <li>{{item}}</li>
+         {% endfor %}
+      </ul>
+      {% elif list == "ol" %}
+      <ol>
+        {% for item in jobs_list['jobs'] %}
+          <li>{{item}}</li>
+        {% endfor %}
+      </ol>
+      {% else %}
+             <h2>НЕВЕРНЫЙ ПАРАМЕТР</h2>
+      {% endif %}
+    </body>
+    </html>
