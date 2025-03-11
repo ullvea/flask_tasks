@@ -1,6 +1,4 @@
-h1{
-    color:red;
-}
+
 form.login_form {
     margin-left: auto;
     margin-right: auto;
@@ -13,4 +11,8 @@ form.login_form {
 .my-carousel .carousel-item{
     display: flex;
     max-height: 500px;
+}
+h4{
+    padding-left: 20px;
+    color:gray;
 }

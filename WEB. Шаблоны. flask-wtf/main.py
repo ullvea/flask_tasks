@@ -39,6 +39,22 @@ def distribution():
     param['list'] = ['Катя', 'Саша', 'Ваня']
     return render_template('distribution.html', **param)
 
+@app.route('/answer')
+@app.route('/auto_answer')
+def auto_answer():
+    param = {}
+    param['title'] = 'Анкета'
+    param['surname'] = 'Watny'
+    param['name'] = 'Mark'
+    param['education'] = 'выше среднего'
+    param['profession'] = 'штурман'
+    param['sex'] = 'male'
+    param['motivation'] = '-'
+    param['ready'] = 'True'
+    return render_template('auto_answer.html', **param)
+
+
+
 
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')

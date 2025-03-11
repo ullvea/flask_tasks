@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block color %}
+<link rel="stylesheet"
+                       href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+{% block content %}
+<div align="center">
+  <br>Фамилия: {{surname}}</br>
+  <br>Имя: {{name}}</br>
+  <br>Образование: {{education}}</br>
+  <br>Профессия: {{profession}}</br>
+  <br>Пол: {{sex}}</br>
+  <br>Мотивация: {{motivation}}</br>
+  <br>Готовы остаться на Марсе?: {{ready}}</br>
+</div>
+{% endblock %}
+
