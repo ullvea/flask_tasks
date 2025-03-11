@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-
+@app.route('/', methods=['POST', 'GET'])
 @app.route('/astronaut_selection', methods=['POST', 'GET'])
 def form_sample():
     if request.method == 'GET':
@@ -119,65 +119,67 @@ def load_photo():
     print(os.path.exists('static/img'))
     if request.method == 'GET' and not any(os.scandir('static/img')):
         return f'''<!doctype html>
-                        <html lang="en">
-                          <head>
-                            <meta charset="utf-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                             <link rel="stylesheet"
-                             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-                             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-                             crossorigin="anonymous">
-                            <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
-                            <title>Пример загрузки файла</title>
-                          </head>
-                          <body>
-                            <h1>Загрузим файл</h1>
-                            <form method="post" enctype="multipart/form-data">
-                               <div class="form-group">
-                                    <label for="photo">Выберите файл</label>
-                                    <input type="file" class="form-control-file" id="photo" name="file">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Отправить</button>
-                            </form>
-                          </body>
-                        </html>'''
+                <html lang="en">
+                <head>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+                    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+                    crossorigin="anonymous">
+                    <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
+                    <title>Отбор астронавтов</title>
+                </head>
+                <body>
+                    <div align="center">
+                        <h2>Анкета претендента</h2>
+                        <h5>на участие в миссии</h5>
+                    </div>
+                    <div>
+                        <form class="login_form" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="photo">Выберите файл</label>
+                                <input type="file" class="form-control-file" id="photo" name="file">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+                        </form>
+                    </div>
+                </body>
+                </html>'''
     elif request.method == 'POST':
         f = request.files['file']
         f.save(os.path.join('static/img', f.filename))
-        return 'Обновите страничку'
+        return 'Файл успешно загружен! Обновите страницу.'
     else:
         print(os.listdir('static/img')[0])
+        # <img src="/static/img/{os.listdir('static/img')[0]}" style="max-width: 400px;>
         return f'''<!doctype html>
-                                <html lang="en">
-                                  <head>
-                                    <meta charset="utf-8">
-                                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                                    <link rel="stylesheet"
-                                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-                                    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-                                    crossorigin="anonymous">
-                                    <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
-                                    <title>Отбор астронавтов</title>
-                                  </head>
-                                  <body>
-                                  <div>
-                                        <form class="login_form" method="post">
-                                        <div align="center">
-                                    <h2>Анкета претендента</h2>
-                                    <h5>на участие в миссии</h5>
-                                  </div align="center">  
-                                    <div class="form-group">
-                                        <label for="photo">Приложите фотографию</label>
-                                         <input type="file" class="form-control-file" id="photo" name="file">
-                                    </div>
-                                        <br>
-                                        <img src="/static/img/{os.listdir('static/img')[0]}" style="max-width: 400px;>
-                                        <br>
-                                        <button type="submit" class="btn btn-primary">Отправить</button>
-                                    </form>
-                                  </div>
-                                  </body>
-                                </html>'''
+                <html lang="en">
+                <head>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+                    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+                    crossorigin="anonymous">
+                    <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
+                    <title>Отбор астронавтов</title>
+                </head>
+                <body>
+                    <div align="center">
+                        <h2>Анкета претендента</h2>
+                        <h5>на участие в миссии</h5>
+                    </div>
+                    <div>
+                        <form class="login_form" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="photo">Выберите файл</label>
+                                <input type="file" class="form-control-file" id="photo" name="file">
+                            </div>
+                            <img src="/static/img/{os.listdir('static/img')[0]}" style="max-width: 400px;>
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+                        </form>
+                    </div>
+                </body>
+                </html>'''
 
 
 
