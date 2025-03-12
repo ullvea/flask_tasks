@@ -80,5 +80,13 @@ def success():
     return f'<h1>Успешно!</h1>'
 
 
+@app.route('/table/<sex>/<years>')
+def table_param(sex, years):
+    param = {}
+    param['sex'] = sex
+    param['years'] = int(years)
+    return render_template('table_param.html', **param)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')

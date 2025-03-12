@@ -28,3 +28,26 @@ h4{
     width: 150px;
     height: 50px;
 }
+th{
+background-color: gray;
+}
+
+.child-male{
+    background-color: #a8d9ff;
+    width: 300px;
+}
+
+.adult-male{
+    background-color: #192d6b;
+    width: 300px;
+}
+
+.child-female{
+    background-color: #FFCBDB;
+    width: 300px;
+}
+
+.adult-female{
+    background-color: #FB607F;
+    width: 300px;
+}
