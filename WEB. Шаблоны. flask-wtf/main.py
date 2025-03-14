@@ -3,6 +3,7 @@ import json
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
+import random
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -86,6 +87,18 @@ def table_param(sex, years):
     param['sex'] = sex
     param['years'] = int(years)
     return render_template('table_param.html', **param)
+
+
+@app.route('/member')
+def member():
+    with open("templates/member.json", "rt", encoding="utf8") as f:
+        jobs_list = json.loads(f.read())
+    member = random.choice(list(jobs_list.keys()))
+    param = {}
+    param['member'] = jobs_list[member]
+    param['job'] = ', '.join(sorted(jobs_list[member]['job']))
+    print(jobs_list[member])
+    return render_template('member.html', **param)
 
 
 if __name__ == '__main__':

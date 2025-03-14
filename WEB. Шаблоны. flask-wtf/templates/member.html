@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block color %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+{% block content %}
+<div align="center">
+    <h1>{{member["name"]}}</h1>
+    <img src={{member["img"]}} class="d-block w-100" width="300" height="300">
+    <h2>{{job}}</h2>
+</div>
+{% endblock %}
