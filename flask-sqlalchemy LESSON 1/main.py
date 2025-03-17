@@ -11,9 +11,13 @@ def main():
     global_init(db_name)
     session = create_session()
     # app.run()
-    for job in session.query(Job).all():
-        if job.work_size < 20 and job.is_finished == 0:
-            print(job)
+    for dep in session.query(Department).filter(Department.id == 1):
+        for i in list(map(int, dep.members.split(', '))):
+            sum_hours = 0
+            for user in session.query(Jobs).filter(Jobs.collaborators.like(f'%{i}%')):
+                sum_hours += user.work_size
+            if sum_hours > 25:
+                print(user.name, user.surname)
 
 
 if __name__ == '__main__':
