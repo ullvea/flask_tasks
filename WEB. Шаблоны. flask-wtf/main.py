@@ -1,9 +1,10 @@
-from flask import Flask, url_for, render_template, redirect
+from flask import Flask, url_for, render_template, redirect, request
 import json
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 import random
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -99,6 +100,33 @@ def member():
     param['job'] = ', '.join(sorted(jobs_list[member]['job']))
     print(jobs_list[member])
     return render_template('member.html', **param)
+
+def arr():
+    images = []
+    for filename in os.listdir('static/landscapes/'):
+        if filename.endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp')):
+            file_path = os.path.join('static/landscapes/', filename)
+            images.append(file_path)
+    print(images)
+    return images
+
+
+@app.route('/galery', methods=['POST', 'GET'])
+def galery():
+    if request.method == 'GET':
+        param = {}
+        param['list']= arr()
+        return render_template('galery.html', **param)
+    elif request.method == 'POST':
+        f = request.files['file']
+        f.save(os.path.join('WEB. Шаблоны. flask-wtf/static/img', f.filename))
+        return 'Файл успешно загружен! Обновите страницу.'
+    else:
+        param = {}
+        param['list'] = arr()
+        return render_template('galery.html', **param)
+
+
 
 
 if __name__ == '__main__':
