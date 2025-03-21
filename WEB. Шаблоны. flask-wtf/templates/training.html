@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
-<h1>Миссия Колонизация Марса</h1>
-<h4>И на Марсе будут яблони цвести!</h4>
+{% extends "base.html" %}
+{% block color %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+{% block content %}
 {% if "инженер" in prof or "строитель" in prof %}
 <div align="center">
     {% block header1 %}
@@ -23,5 +20,4 @@
     <img src="/static/training/im2.jpg" class="d-block w-100">{% endblock %}
 </div>
 {% endif %}
-</body>
-</html>
+{% endblock %}
