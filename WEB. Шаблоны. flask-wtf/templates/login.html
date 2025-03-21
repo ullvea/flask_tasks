@@ -18,7 +18,7 @@
     </p>
     <p>
         {{ form.password_astr.label }}<br>
-        {{ form.password_astr(class="form-control", type="password_astr") }}<br>
+        {{ form.password_astr(class="form-control", type="password") }}<br>
         {% for error in form.password_astr.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
@@ -37,7 +37,7 @@
     </p>
     <p>
         {{ form.password_cap.label }}<br>
-        {{ form.password_cap(class="form-control", type="password_cap") }}<br>
+        {{ form.password_cap(class="form-control", type="password") }}<br>
         {% for error in form.password_cap.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
