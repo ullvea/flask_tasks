@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    </head>
-    <body>
-      <h1>Миссия Колонизация Марса</h1>
-        <h4>И на Марсе будут яблони цвести!</h4>
+{% extends "base.html" %}
+{% block color %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+{% block content %}
         <div align="center">
           <h3>Размещение по каютам</h3>
           {% set cabin = "Каюта №" %}
@@ -15,5 +12,4 @@
           </br>
         {% endfor %}
         </div>
-    </body>
-    </html>
+{% endblock %}
