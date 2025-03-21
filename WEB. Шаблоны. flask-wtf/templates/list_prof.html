@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    </head>
-    <body>
-      <h1>Миссия Колонизация Марса</h1>
-        <h4>И на Марсе будут яблони цвести!</h4>
+{% extends "base.html" %}
+{% block color %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+{% block content %}
       {% if list == "ul" %}
       <ul>
          {% for item in jobs_list['jobs'] %}
@@ -21,5 +18,4 @@
       {% else %}
              <h2>НЕВЕРНЫЙ ПАРАМЕТР</h2>
       {% endif %}
-    </body>
-    </html>
+{% endblock %}
