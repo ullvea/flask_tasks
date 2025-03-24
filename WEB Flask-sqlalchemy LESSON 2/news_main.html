@@ -12,6 +12,16 @@
 {% if user.is_authenticated %}
 <a href="/news/logout">Выйти {{user.username}}</a>
 {%else%}
+<a href="/news/login">Войти</a>
+{%endif%}
+{%block content%}
+{% if user.is_authenticated %}
+<div>{{user.username}}</div>
+{%else%}
+<div>Нет контента</div>
 
+{%endif%}
+
+{%endblock%}
 </body>
 </html>
