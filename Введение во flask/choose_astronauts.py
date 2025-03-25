@@ -116,8 +116,8 @@ def form_sample():
 
 @app.route('/load_photo', methods=['POST', 'GET'])
 def load_photo():
-    print(os.path.exists('WEB. Шаблоны. flask-wtf/static/img'))
-    if request.method == 'GET' and not any(os.scandir('WEB. Шаблоны. flask-wtf/static/img')):
+    print(os.path.exists('../WEB. Шаблоны. flask-wtf/static/img'))
+    if request.method == 'GET' and not any(os.scandir('../WEB. Шаблоны. flask-wtf/static/img')):
         return f'''<!doctype html>
                 <html lang="en">
                 <head>
@@ -147,10 +147,10 @@ def load_photo():
                 </html>'''
     elif request.method == 'POST':
         f = request.files['file']
-        f.save(os.path.join('WEB. Шаблоны. flask-wtf/static/img', f.filename))
+        f.save(os.path.join('../WEB. Шаблоны. flask-wtf/static/img', f.filename))
         return 'Файл успешно загружен! Обновите страницу.'
     else:
-        print(os.listdir('WEB. Шаблоны. flask-wtf/static/img')[0])
+        print(os.listdir('../WEB. Шаблоны. flask-wtf/static/img')[0])
         # <img src="/static/img/{os.listdir('static/img')[0]}" style="max-width: 400px;>
         return f'''<!doctype html>
                 <html lang="en">
@@ -174,7 +174,7 @@ def load_photo():
                                 <label for="photo">Выберите файл</label>
                                 <input type="file" class="form-control-file" id="photo" name="file">
                             </div>
-                            <img src="/static/img/{os.listdir('WEB. Шаблоны. flask-wtf/static/img')[0]}" style="max-width: 400px;>
+                            <img src="/static/img/{os.listdir('../WEB. Шаблоны. flask-wtf/static/img')[0]}" style="max-width: 400px;>
                             <button type="submit" class="btn btn-primary">Отправить</button>
                         </form>
                     </div>

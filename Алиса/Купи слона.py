@@ -1,6 +1,7 @@
 # импортируем библиотеки
 from flask import Flask, request, jsonify
 import logging
+import json
 
 # создаём приложение
 # мы передаём __name__, в нём содержится информация,
@@ -52,7 +53,7 @@ def main():
     logging.info(f'Response:  {response!r}')
 
     # Преобразовываем в JSON и возвращаем
-    return jsonify(response)
+    return json.dumps(response)
 
 
 def handle_dialog(req, res):
