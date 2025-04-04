@@ -18,15 +18,22 @@ def human_read_format(size):
 
 # C:\Users\User\PycharmProjects\git_project1
 
+
 path = input()
 ans = {}
 for i in os.listdir(path):  # файлы в этом каталоге
     try:
         full_path = os.path.join(path, i)
         if not os.path.isfile(full_path):
-            ans[i] = os.path.getsize(full_path)
+            size = 0
+            for currentdir, dirs, files in os.walk(full_path):
+                for file in files:
+                    file_path = os.path.join(currentdir, file)
+                    size += os.path.getsize(file_path)
+            ans[i] = size
     except Exception as e:
         pass
+
 keys = ans.keys()
 values = list(ans.values())
 values.sort(key=lambda x: -x)
